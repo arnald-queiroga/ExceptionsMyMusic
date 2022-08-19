@@ -21,4 +21,10 @@ public class Music {
 
     @Column(name = "Nome")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "ArtistaId", nullable = false
+    )
+    private Artist artist;
 }
