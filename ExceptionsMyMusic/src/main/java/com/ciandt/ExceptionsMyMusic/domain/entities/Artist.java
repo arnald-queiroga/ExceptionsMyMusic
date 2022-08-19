@@ -1,5 +1,4 @@
 package com.ciandt.ExceptionsMyMusic.domain.entities;
-
 import lombok.*;
 
 @AllArgsConstructor
