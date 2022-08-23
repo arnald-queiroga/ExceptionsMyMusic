@@ -23,8 +23,6 @@ public class Music {
     private String name;
 
     @ManyToOne
-    @JoinColumn(
-            name = "ArtistaId", nullable = false
-    )
+    @JoinColumn(name = "ArtistaId", nullable = false)
     private Artist artist;
 }
