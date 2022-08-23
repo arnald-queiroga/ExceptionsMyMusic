@@ -26,4 +26,5 @@ public class Artist {
 
     @OneToMany(mappedBy = "artist")
     private Set<Music> musics = new HashSet<>();
+
 }
