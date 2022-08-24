@@ -1,15 +1,15 @@
 package com.ciandt.ExceptionsMyMusic.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.ciandt.ExceptionsMyMusic.domain.entities.Artist;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class MusicDTO {
     private String id;
     private String name;
+    private Artist artist;
 }

@@ -10,7 +10,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-@EqualsAndHashCode
 @Entity
 @Table(name = "Playlists")
 public class Playlist {
