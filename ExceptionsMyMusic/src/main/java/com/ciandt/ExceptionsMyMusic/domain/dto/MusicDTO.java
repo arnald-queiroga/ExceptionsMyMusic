@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class MusicDTO {
     private String name;
     private Artist artist;
 
-   public MusicDTO(Music entity) {
+    public MusicDTO(Music entity) {
         this.id = entity.getId();
         this.name = entity.getName();
         this.artist = entity.getArtist();

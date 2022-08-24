@@ -17,8 +17,8 @@ public class MusicService {
 
     @Transactional(readOnly = true)
     public List<MusicDTO> findByArtistOrMusic(String nome){
-            List<Music> list = musicRepository.findByArtistOrNameOfMusic(nome);
-            List<MusicDTO> listDTO = list.stream().map(music -> new MusicDTO(music)).collect(Collectors.toList());
-           return listDTO;
+        List<Music> list = musicRepository.findByArtistOrNameOfMusic(nome);
+        List<MusicDTO> listDTO = list.stream().map(music -> new MusicDTO(music)).collect(Collectors.toList());
+        return listDTO;
     }
 }
