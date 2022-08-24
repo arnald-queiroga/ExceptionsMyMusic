@@ -13,7 +13,6 @@ import lombok.Setter;
 public class ArtistDTO {
     private String id;
     private String name;
-
     public ArtistDTO(Artist entity){
         this.id = entity.getId();
         this.name = entity.getName();

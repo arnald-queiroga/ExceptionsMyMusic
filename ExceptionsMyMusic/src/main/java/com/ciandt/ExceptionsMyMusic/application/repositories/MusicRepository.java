@@ -12,5 +12,4 @@ public interface MusicRepository extends JpaRepository<Music, String> {
             "M.ArtistaId WHERE Upper(A.nome) Like Upper ('%' || :name || '%') " +
             "OR Upper(M.nome) like Upper('%' || :name || '%') ORDER BY M.nome, A.nome")
     List<Music> findByArtistOrNameOfMusic(String name);
-
 }
