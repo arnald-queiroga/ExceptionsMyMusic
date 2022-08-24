@@ -13,10 +13,10 @@ import java.util.Set;
 @Service
 public class PlaylistService {
     @Autowired
-    PlaylistRepository playlistRepository;
+    private PlaylistRepository playlistRepository;
 
     @Autowired
-    MusicRepository musicRepository;
+    private MusicRepository musicRepository;
 
     public void addMusicToPlaylist(String playlistID, MusicDTO musicDTO) {
 
