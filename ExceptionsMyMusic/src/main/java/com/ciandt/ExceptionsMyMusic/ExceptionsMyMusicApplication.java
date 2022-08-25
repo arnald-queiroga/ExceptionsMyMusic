@@ -13,5 +13,4 @@ public class ExceptionsMyMusicApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ExceptionsMyMusicApplication.class, args);
 	}
-
 }

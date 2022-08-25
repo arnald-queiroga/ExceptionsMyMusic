@@ -1,8 +1,17 @@
 package com.ciandt.ExceptionsMyMusic.application.controllers.exceptions;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.Instant;
 
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Setter
+//@Getter
 public class StandardError implements Serializable {
     private static final long serialVersionUID = 1L;
     private Instant timestamp;
@@ -12,76 +21,45 @@ public class StandardError implements Serializable {
     private String path;
 
     public StandardError() {
-
     }
-
 
     public Instant getTimestamp() {
-
         return timestamp;
-
     }
-
 
     public void setTimestamp(Instant timestamp) {
-
         this.timestamp = timestamp;
-
     }
-
 
     public Integer getStatus() {
-
         return status;
-
     }
-
 
     public void setStatus(Integer status) {
-
         this.status = status;
-
     }
-
 
     public String getError() {
-
         return error;
-
     }
-
 
     public void setError(String error) {
-
         this.error = error;
-
     }
-
 
     public String getMessage() {
-
         return message;
-
     }
-
 
     public void setMessage(String message) {
-
         this.message = message;
-
     }
-
 
     public String getPath() {
-
         return path;
-
     }
 
-
     public void setPath(String path) {
-
         this.path = path;
-
     }
 }

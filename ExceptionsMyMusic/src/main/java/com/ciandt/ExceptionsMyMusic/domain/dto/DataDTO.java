@@ -13,7 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DataDTO {
-
     private List<MusicDTO> data;
-
 }
