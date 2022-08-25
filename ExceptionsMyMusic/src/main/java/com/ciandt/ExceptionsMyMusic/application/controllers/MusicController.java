@@ -4,7 +4,6 @@ import com.ciandt.ExceptionsMyMusic.domain.dto.DataDTO;
 import com.ciandt.ExceptionsMyMusic.domain.dto.MusicDTO;
 import com.ciandt.ExceptionsMyMusic.domain.services.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
