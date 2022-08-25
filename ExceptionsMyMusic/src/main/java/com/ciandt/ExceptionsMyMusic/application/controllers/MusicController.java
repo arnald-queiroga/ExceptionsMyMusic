@@ -16,7 +16,7 @@ public class MusicController {
     private MusicService musicService;
 
     @GetMapping(value = "/musicas")
-    public ResponseEntity<?> findMusicandArtistByName(@RequestParam (value = "name") String name){
+    public ResponseEntity<?> findMusicandArtistByName(@RequestParam (value = "filtro") String name){
         List<MusicDTO> dtoMusic = musicService.findByArtistOrMusic(name);
         return ResponseEntity.ok().body(new DataDTO(dtoMusic));
     }
