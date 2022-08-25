@@ -8,10 +8,6 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.time.Instant;
 
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Setter
-//@Getter
 public class StandardError implements Serializable {
     private static final long serialVersionUID = 1L;
     private Instant timestamp;
