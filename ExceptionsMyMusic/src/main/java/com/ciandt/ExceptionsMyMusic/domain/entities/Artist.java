@@ -1,4 +1,5 @@
 package com.ciandt.ExceptionsMyMusic.domain.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,6 +25,7 @@ public class Artist {
     @Column(name = "Nome")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "artist")
     private Set<Music> musics = new HashSet<>();
 }
