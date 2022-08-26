@@ -10,7 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 public class ExceptionsMyMusicApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ExceptionsMyMusicApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ExceptionsMyMusicApplication.class, args);
+    }
 }

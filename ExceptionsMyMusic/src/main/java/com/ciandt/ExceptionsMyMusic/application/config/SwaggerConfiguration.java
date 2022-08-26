@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration extends WebMvcConfigurationSupport {
 
     @Bean
-    public Docket docket(){
+    public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.ciandt.ExceptionsMyMusic.application.controllers"))
@@ -35,7 +35,7 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
-    private ApiInfo apiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Exceptions - MyMusic API Rest")
                 .description("My Music Project")
@@ -44,7 +44,7 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
                 .build();
     }
 
-    private Contact contact(){
+    private Contact contact() {
         return new Contact("Exceptions My Music", "https://github.com/arnald-queiroga/ExceptionsMyMusic", "alessandras@ciandt.com");
     }
 }

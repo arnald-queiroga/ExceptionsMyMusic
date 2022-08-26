@@ -20,13 +20,13 @@ public class MusicService {
     @Transactional(readOnly = true)
     public List<MusicDTO> findByArtistOrMusic(String nome) {
 
-        if (nome.length() <= 2){
+        if (nome.length() <= 2) {
             throw new ResourceNotFoundException("O filtro deve ter 3 ou mais caracteres");
         }
 
         List<Music> list = musicRepository.findByArtistOrNameOfMusic(nome);
 
-        if (list.isEmpty()){
+        if (list.isEmpty()) {
             throw new NoContentException("Dados não encontrados");
         }
         List<MusicDTO> listDTO = list.stream().map(music -> new MusicDTO(music)).collect(Collectors.toList());

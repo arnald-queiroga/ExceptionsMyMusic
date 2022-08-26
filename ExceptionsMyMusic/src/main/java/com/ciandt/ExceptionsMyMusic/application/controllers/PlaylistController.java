@@ -24,7 +24,7 @@ public class PlaylistController {
             @ApiResponse(code = 400, message = "Playlist Does Not Exist OR Existing Song in Playlist OR Payload Body Does Not Conform to Documentation"),
     })
     @PostMapping("/{playlistId}/musicas")
-    public ResponseEntity<Playlist> findMusicandArtistByName(@PathVariable (value = "playlistId") String playlistId, @RequestBody DataDTO dataDTO){
+    public ResponseEntity<Playlist> findMusicandArtistByName(@PathVariable(value = "playlistId") String playlistId, @RequestBody DataDTO dataDTO) {
         MusicDTO musicDTO = dataDTO.getData().get(0);
         playlistService.addMusicToPlaylist(playlistId, musicDTO);
         return new ResponseEntity<Playlist>(HttpStatus.CREATED);

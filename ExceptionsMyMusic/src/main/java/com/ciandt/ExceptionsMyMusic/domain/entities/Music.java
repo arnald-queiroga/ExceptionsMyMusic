@@ -2,6 +2,7 @@ package com.ciandt.ExceptionsMyMusic.domain.entities;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
