@@ -6,6 +6,8 @@ import com.ciandt.ExceptionsMyMusic.domain.services.MusicService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping
 public class MusicController {
+
+    private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(MusicController.class);
     @Autowired
     private MusicService musicService;
 
@@ -27,6 +31,7 @@ public class MusicController {
     @GetMapping(value = "/musicas")
     public ResponseEntity<?> findMusicandArtistByName(@RequestParam(value = "filtro") String name) {
         List<MusicDTO> dtoMusic = musicService.findByArtistOrMusic(name);
+        LOGGER.info("Operação realizada com sucesso!");
         return ResponseEntity.ok().body(new DataDTO(dtoMusic));
     }
 }
