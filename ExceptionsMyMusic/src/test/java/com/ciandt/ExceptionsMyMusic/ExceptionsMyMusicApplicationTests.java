@@ -9,5 +9,4 @@ class ExceptionsMyMusicApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
