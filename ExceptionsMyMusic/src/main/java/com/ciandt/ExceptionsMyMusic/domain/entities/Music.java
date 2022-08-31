@@ -36,4 +36,9 @@ public class Music {
         this.name = name;
         this.artist = artist;
     }
+
+    public Music(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

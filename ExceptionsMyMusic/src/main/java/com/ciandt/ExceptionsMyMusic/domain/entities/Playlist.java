@@ -25,4 +25,7 @@ public class Playlist {
     @JoinTable(name = "PlaylistMusicas", joinColumns = @JoinColumn(name = "PlaylistId"),
             inverseJoinColumns = @JoinColumn(name = "MusicaId"))
     private Set<Music> musics = new HashSet<>();
+
+    public Playlist(String s) {
+    }
 }
