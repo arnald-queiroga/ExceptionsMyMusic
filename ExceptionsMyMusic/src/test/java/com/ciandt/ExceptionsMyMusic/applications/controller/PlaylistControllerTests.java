@@ -1,6 +1,7 @@
 package com.ciandt.ExceptionsMyMusic.applications.controller;
 
 import com.ciandt.ExceptionsMyMusic.application.controllers.PlaylistController;
+import com.ciandt.ExceptionsMyMusic.domain.dto.ArtistDTO;
 import com.ciandt.ExceptionsMyMusic.domain.dto.DataDTO;
 import com.ciandt.ExceptionsMyMusic.domain.dto.MusicDTO;
 import com.ciandt.ExceptionsMyMusic.domain.dto.PlaylistDTO;
@@ -12,20 +13,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PlaylistController.class)
+@AutoConfigureMockMvc
 public class PlaylistControllerTests {
     @Autowired
     private MockMvc mockMvc;
@@ -40,6 +41,9 @@ public class PlaylistControllerTests {
 
     @Autowired
     private PlaylistController playlistController;
+
+    @Autowired
+    private MockMvc mvc;
 
     @Test
     public void insertShouldReturnPlaylistCreated() throws Exception {
@@ -79,5 +83,20 @@ public class PlaylistControllerTests {
                 mockMvc.perform(get("/{playlistId}/musicas", nonExistingId)
                         .accept(MediaType.APPLICATION_JSON));
         result.andExpect(status().isNotFound());
+    }
+
+    @Test
+    void test_removerMusica() throws Exception {
+
+        String playlist = "92d8123f-e9f6-4806-8e0e-1c6a5d46f2ed";
+        String musica = "c96b8f6f-4049-4e6b-8687-82e29c05b735";
+
+        service.removeMusicToPlaylist(playlist, musica);
+
+        ResultActions result =
+                mockMvc.perform(delete("/playlists/92d8123f-e9f6-4806-8e0e-1c6a5d46f2ed/musicas/c96b8f6f-4049-4e6b-8687-82e29c05b73")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isOk());
     }
 }
