@@ -17,13 +17,18 @@ The project pursuit to show the result of teamwork, developed by CI&T juniors pr
 </h3>
 
 ## ⚙️ Architecture
+The software design pattern is defined by an adaptation of MVC (Model-View-Controller) architecture concepts. As this is a strictly back-end development, the view module will not be considered during this phase. Figure 2 represents the project architecture.
+<h1 align="center">
+ <img alt="Exceptions" title="#Exceptions" src="ExceptionsMyMusic/.github/midia/arquitetura.drawio2.drawio.png"/>
+</h1>
+
 To design this project we chose the MVC architecture, using DTO on the layers. The reason for this choice is that with mvc architecture we have the following benefits:
 - System maintenance becomes easier;
 - Reuse of code, mainly from the model layer, which can be reused in other projects;
 - Easy for multiple developers to collaborate and work together;
 - Easier to debug as we have multiple levels correctly written in the app;
 <h1 align="center">
- <img alt="Exceptions" title="#Exceptions" src="ExceptionsMyMusic/.github/midia/arquitectureModel.png"/>
+ <img alt="Exceptions" title="#Exceptions" src="ExceptionsMyMusic/.github/midia/arquiteturaModelo.png"/>
 </h1>
 
 ## 📌 Features
