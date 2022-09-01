@@ -21,6 +21,7 @@ The software design pattern is defined by an adaptation of MVC (Model-View-Contr
 <h1 align="center">
  <img alt="Exceptions" title="#Exceptions" src="ExceptionsMyMusic/.github/midia/arquitetura.drawio2.drawio.png"/>
 </h1>
+
 To design this project we chose the MVC architecture, using DTO on the layers. The reason for this choice is that with mvc architecture we have the following benefits:
 - System maintenance becomes easier;
 - Reuse of code, mainly from the model layer, which can be reused in other projects;
