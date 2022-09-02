@@ -124,8 +124,7 @@ public class PlaylistServiceTests {
         Assertions.assertThrows(NoContentException.class, () -> musicService.findByArtistOrMusic("asdsadasdasdasdasd"));
     }
 
-    //  -----
-
+    //  Testes PlaylistService Abaixo
     Artist art1 = new Artist("909090xx", "The Beatles");
     Music mus1 = new Music("808080xx", "Here Comes the Sun", art1);
     Artist art2 = new Artist("707070xx", "Michael Jackson");
@@ -150,7 +149,6 @@ public class PlaylistServiceTests {
 
     }
 
-
     @Test
     public void shouldThrowAnExceptionWhenRemovingTheSongIfItCanNotFindTheSongInThePlaylist() throws Exception {
         String playlistID = "a39926f4-6acb-4497-884f-d4e5296ef652";
@@ -166,8 +164,6 @@ public class PlaylistServiceTests {
 
     @Test
     public void removeMusicFromPlaylist() {
-//        Artist art1 = new Artist("909090xx", "The Beatles");
-//        Music mus1 = new Music("808080xx", "Here Comes the Sun", art1);
         String musicId = "03c86d1e-d3a0-462e-84a9-755cfc49aab8";
 
         String playlist = "a39926f4-6acb-4497-884f-d4e5296ef652";
