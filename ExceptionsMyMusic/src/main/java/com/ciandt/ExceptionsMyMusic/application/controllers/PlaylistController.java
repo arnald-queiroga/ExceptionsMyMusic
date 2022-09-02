@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "/playlists")
 public class PlaylistController {
@@ -45,7 +43,6 @@ public class PlaylistController {
     })
     public ResponseEntity<String> removeMusicFromPlaylist(@PathVariable (value = "playlistId") String playlistId
             , @PathVariable (value = "musicaId") String musicaId
-            //, @RequestHeader(value = "name") String nome
     ) {
         playlistService.removeMusicToPlaylist(playlistId, musicaId);
         return ResponseEntity.ok().body("Música deletada com sucesso!");

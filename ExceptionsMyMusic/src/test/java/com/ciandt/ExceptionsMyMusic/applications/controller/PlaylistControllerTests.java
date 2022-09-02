@@ -1,7 +1,6 @@
 package com.ciandt.ExceptionsMyMusic.applications.controller;
 
 import com.ciandt.ExceptionsMyMusic.application.controllers.PlaylistController;
-import com.ciandt.ExceptionsMyMusic.domain.dto.ArtistDTO;
 import com.ciandt.ExceptionsMyMusic.domain.dto.DataDTO;
 import com.ciandt.ExceptionsMyMusic.domain.dto.MusicDTO;
 import com.ciandt.ExceptionsMyMusic.domain.dto.PlaylistDTO;
