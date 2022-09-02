@@ -19,6 +19,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(SpringExtension.class)
 public class PlaylistServiceTests {
 
@@ -26,6 +29,9 @@ public class PlaylistServiceTests {
     private PlaylistRepository playlistRepository;
     @Mock
     private MusicRepository musicRepository;
+
+    @Mock
+    private MusicService musicServices;
 
     @InjectMocks
     private MusicService musicService;
@@ -116,5 +122,64 @@ public class PlaylistServiceTests {
     @Test
     void ThrowsEmptyListException_WhenFilterIs_NotFound() {
         Assertions.assertThrows(NoContentException.class, () -> musicService.findByArtistOrMusic("asdsadasdasdasdasd"));
+    }
+
+    //  -----
+
+    Artist art1 = new Artist("909090xx", "The Beatles");
+    Music mus1 = new Music("808080xx", "Here Comes the Sun", art1);
+    Artist art2 = new Artist("707070xx", "Michael Jackson");
+    Music mus2 = new Music("606060xx", "Billie Jean", art2);
+
+    @Test
+    public void shouldThrowAnExceptionWhenRemovingTheMusicIfItCanNotFindThePlaylist() throws Exception {
+        String playlistId = "Id da playlist não encontrado!";
+
+        when(playlistRepository.findById(playlistId)).thenReturn(null);
+
+        try {
+            playlistRepository.removeMusicFromPlaylist(playlistId, mus1.getId());
+        } catch (Throwable e) {
+            assertEquals(ResourceNotFoundException.class, e.getClass());
+            assertEquals("Playlist não encontrada!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void sholdRemoveMusicToPLaylist(){
+
+    }
+
+
+    @Test
+    public void shouldThrowAnExceptionWhenRemovingTheSongIfItCanNotFindTheSongInThePlaylist() throws Exception {
+        String playlistID = "a39926f4-6acb-4497-884f-d4e5296ef652";
+        String musicID = null;
+
+        try {
+            playlistRepository.removeMusicFromPlaylist(playlistID, musicID);
+        } catch (Throwable e) {
+            assertEquals(ResourceNotFoundException.class, e.getClass());
+            assertEquals("Música não encontrada na playlist!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void removeMusicFromPlaylist() {
+//        Artist art1 = new Artist("909090xx", "The Beatles");
+//        Music mus1 = new Music("808080xx", "Here Comes the Sun", art1);
+        String musicId = "03c86d1e-d3a0-462e-84a9-755cfc49aab8";
+
+        String playlist = "a39926f4-6acb-4497-884f-d4e5296ef652";
+
+        List<MusicDTO> musicDTO = musicServices.findByArtistOrMusic(musicId);
+
+        String musica = "c96b8f6f-4049-4e6b-8687-82e29c05b735";
+        Mockito.when(playlistRepository.findMusicByPlaylists(playlist, musica)).thenReturn(String.valueOf(Optional.of(new Playlist())));
+        Mockito.when(playlistRepository.findById(playlist)).thenReturn(Optional.of(new Playlist(playlist)));
+        Mockito.when(musicServices.findByArtistOrMusic("Here Comes the Sun")).thenReturn(musicDTO);
+        Playlist playlistMusica = new Playlist(playlist);
+        playlistService.removeMusicToPlaylist(playlist, musica);
+        Assertions.assertNotEquals(playlistMusica, playlistRepository.findMusicByPlaylists(playlist, musicId));
     }
 }

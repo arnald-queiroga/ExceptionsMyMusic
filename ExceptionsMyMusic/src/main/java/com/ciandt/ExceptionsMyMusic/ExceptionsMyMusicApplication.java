@@ -13,11 +13,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableWebMvc
 @SpringBootApplication
 public class ExceptionsMyMusicApplication {
-<<<<<<< HEAD
-	public static void main(String[] args) {
-		SpringApplication.run(ExceptionsMyMusicApplication.class, args);
-	}
-=======
 
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(ExceptionsMyMusicApplication.class);
 
@@ -26,5 +21,4 @@ public class ExceptionsMyMusicApplication {
         SpringApplication.run(ExceptionsMyMusicApplication.class, args);
         LOGGER.info("Exceptions-MyMusic iniciado com sucesso!");
     }
->>>>>>> develop
 }
