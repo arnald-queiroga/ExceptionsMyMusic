@@ -29,26 +29,26 @@ public class PlaylistService {
     public void addMusicToPlaylist(String playlistID, MusicDTO musicDTO) {
 
         if (playlistRepository.findById(playlistID).isEmpty()) {
-            LOGGER.error("Playlist não encontrada para busca realizada.");
-            throw new ResourceNotFoundException("Playlist não encontrada!");
+            LOGGER.error("Playlist not found for search performed.");
+            throw new ResourceNotFoundException("Playlist not found!");
         } else {
             if (musicRepository.findById(musicDTO.getId()).isEmpty()) {
-                LOGGER.error("Música não encontrada na playlist para a busca realizada");
-                throw new ResourceNotFoundException("Música não encontrada!");
+                LOGGER.error("Music not found in the playlist for the search performed");
+                throw new ResourceNotFoundException("Music not found!");
             } else {
                 Playlist playlist = playlistRepository.findById(playlistID).get();
                 Set<Music> musics = playlist.getMusics();
 
                 for (Music music : musics) {
                     if (music.getId().equals(musicDTO.getId())) {
-                        LOGGER.error("Música já existe na playlist");
-                        throw new ResourceNotFoundException("Música existente na playlist!");
+                        LOGGER.error("Music already exists in the playlist");
+                        throw new ResourceNotFoundException("Existing song in the playlist!");
                     }
                 }
                 Music musicToAdd = musicRepository.findById(musicDTO.getId()).get();
                 playlist.getMusics().add(musicToAdd);
                 musicToAdd.getPlaylists().add(playlist);
-                LOGGER.info("Música adiciona à playlist!");
+                LOGGER.info("Music add to playlist!");
                 playlistRepository.save(playlist);
             }
         }
@@ -60,9 +60,9 @@ public class PlaylistService {
             Optional<Playlist> playlist = playlistRepository.findById(playlistID);
             String music = playlistRepository.findMusicByPlaylists(playlistID, musicID);
             if (playlist.isEmpty()) {
-                throw new ResourceNotFoundException("Playlist não encontrada!");
+                throw new ResourceNotFoundException("Playlist not found!");
             } else if (music == null) {
-                throw new ResourceNotFoundException("Música não encontrada na playlist!");
+                throw new ResourceNotFoundException("Music not found in playlist!");
             }
             playlistRepository.removeMusicFromPlaylist(playlistID, musicID);
         } catch (DatabaseException e) {

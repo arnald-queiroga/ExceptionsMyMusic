@@ -123,8 +123,6 @@ public class PlaylistServiceTests {
     void ThrowsEmptyListException_WhenFilterIs_NotFound() {
         Assertions.assertThrows(NoContentException.class, () -> musicService.findByArtistOrMusic("asdsadasdasdasdasd"));
     }
-
-    //  Testes PlaylistService Abaixo
     Artist art1 = new Artist("909090xx", "The Beatles");
     Music mus1 = new Music("808080xx", "Here Comes the Sun", art1);
     Artist art2 = new Artist("707070xx", "Michael Jackson");
@@ -142,11 +140,6 @@ public class PlaylistServiceTests {
             assertEquals(ResourceNotFoundException.class, e.getClass());
             assertEquals("Playlist não encontrada!", e.getMessage());
         }
-    }
-
-    @Test
-    public void sholdRemoveMusicToPLaylist(){
-
     }
 
     @Test

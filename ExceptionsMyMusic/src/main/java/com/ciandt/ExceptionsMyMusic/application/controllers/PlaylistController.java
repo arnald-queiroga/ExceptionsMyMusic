@@ -23,7 +23,7 @@ public class PlaylistController {
     private PlaylistService playlistService;
 
     @PostMapping("/{playlistId}/musicas")
-    @Operation(summary = "Adicionar músicas a playlist", description = "Recebe uma musica e remove da playlist de reprodução")
+    @Operation(summary = "Add songs to playlist", description = "Receive a song and remove it from the playback playlist")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful Operation"),
             @ApiResponse(code = 400, message = "Playlist Does Not Exist OR Existing Song in Playlist OR Payload Body Does Not Conform to Documentation"),
@@ -31,20 +31,20 @@ public class PlaylistController {
     public ResponseEntity<Playlist> findMusicandArtistByName(@PathVariable(value = "playlistId") String playlistId, @RequestBody DataDTO dataDTO) {
         MusicDTO musicDTO = dataDTO.getData().get(0);
         playlistService.addMusicToPlaylist(playlistId, musicDTO);
-        LOGGER.info("Operação realizada com sucesso!");
+        LOGGER.info("Operation performed successfully!");
         return new ResponseEntity<Playlist>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{playlistId}/musicas/{musicaId}")
-    @Operation(summary = "remover musica da playlist", description = "Recebe uma lista de músicas e as adiciona à lista de reprodução")
+    @Operation(summary = "Remove music from playlist", description = "Receive a list of songs and add them to the playlist")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful Operation"),
             @ApiResponse(code = 400, message = "Playlist Does Not Exist OR Existing Song in Playlist OR Payload Body Does Not Conform to Documentation"),
     })
-    public ResponseEntity<String> removeMusicFromPlaylist(@PathVariable (value = "playlistId") String playlistId
-            , @PathVariable (value = "musicaId") String musicaId
+    public ResponseEntity<String> removeMusicFromPlaylist(@PathVariable(value = "playlistId") String playlistId
+            , @PathVariable(value = "musicaId") String musicaId
     ) {
         playlistService.removeMusicToPlaylist(playlistId, musicaId);
-        return ResponseEntity.ok().body("Música deletada com sucesso!");
+        return ResponseEntity.ok().body("Song successfully deleted!");
     }
 }

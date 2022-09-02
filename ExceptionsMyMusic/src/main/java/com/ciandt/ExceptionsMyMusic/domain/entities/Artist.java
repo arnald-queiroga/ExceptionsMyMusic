@@ -1,4 +1,5 @@
 package com.ciandt.ExceptionsMyMusic.domain.entities;
+
 import com.ciandt.ExceptionsMyMusic.domain.dto.ArtistDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -16,7 +17,6 @@ import java.util.Set;
 @Entity
 @Table(name = "Artistas")
 public class Artist {
-
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
