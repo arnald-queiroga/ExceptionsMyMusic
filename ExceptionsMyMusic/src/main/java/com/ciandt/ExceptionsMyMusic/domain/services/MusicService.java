@@ -28,17 +28,21 @@ public class MusicService {
             LOGGER.error("Filter is less than 3 characters long, so invalid search");
             throw new ResourceNotFoundException("Filter must be 3 or more characters long");
         }
+
         LOGGER.info("Search performed successfully, because filter has more than 2 characters");
         List<Music> list = musicRepository.findByArtistOrNameOfMusic(nome);
 
+        List<Music> list = musicRepository.findByArtistOrNameOfMusic(nome);
         if (list.isEmpty()) {
             LOGGER.error("The filter did not return data for the search performed!");
             throw new NoContentException("Data not found");
         }
+        
         LOGGER.info("Search performed successfully, as data found in the database");
         List<MusicDTO> listDTO = list.stream().map(music -> new MusicDTO(music)).collect(Collectors.toList());
 
         LOGGER.info("Data returned successfully!");
+
         return listDTO;
     }
 }
