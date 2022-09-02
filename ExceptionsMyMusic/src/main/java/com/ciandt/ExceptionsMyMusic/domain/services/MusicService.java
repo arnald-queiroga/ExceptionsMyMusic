@@ -29,15 +29,15 @@ public class MusicService {
             throw new ResourceNotFoundException("O filtro deve ter 3 ou mais caracteres");
         }
         LOGGER.info("Busca realizada com sucesso, pois filtro possui mais de 2 caracteres");
-        List<Music> list = musicRepository.findByArtistOrNameOfMusic(nome);
 
+        List<Music> list = musicRepository.findByArtistOrNameOfMusic(nome);
         if (list.isEmpty()) {
             LOGGER.error("O filtro não retornou dados para pesquisa realizada!");
             throw new NoContentException("Dados não encontrados");
         }
         LOGGER.info("Busca realizada com sucesso, pois dados encontrados na base");
-        List<MusicDTO> listDTO = list.stream().map(music -> new MusicDTO(music)).collect(Collectors.toList());
 
+        List<MusicDTO> listDTO = list.stream().map(music -> new MusicDTO(music)).collect(Collectors.toList());
         LOGGER.info("Dados retornados com sucesso!");
         return listDTO;
     }
