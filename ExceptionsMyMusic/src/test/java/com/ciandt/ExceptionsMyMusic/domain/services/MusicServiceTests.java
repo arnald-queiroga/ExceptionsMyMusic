@@ -20,11 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @DisplayName("MusicServiceTest")
-public class MusicServiceTest{
+public class MusicServiceTests {
 
     @Mock
     private MusicRepository musicRepository;
-
     @InjectMocks
     private MusicService musicService;
 
