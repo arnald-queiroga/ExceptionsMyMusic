@@ -83,7 +83,7 @@ public class MusicServiceTests {
             musicService.findByArtistOrMusic(name);
         } catch (Throwable e){
             assertEquals(ResourceNotFoundException.class, e.getClass());
-            assertEquals("O filtro deve ter 3 ou mais caracteres", e.getMessage());
+            assertEquals("Filter must be 3 or more characters long", e.getMessage());
         }
     }
 

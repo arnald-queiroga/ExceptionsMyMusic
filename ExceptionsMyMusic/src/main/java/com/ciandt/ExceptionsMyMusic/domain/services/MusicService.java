@@ -31,8 +31,6 @@ public class MusicService {
 
         LOGGER.info("Search performed successfully, because filter has more than 2 characters");
         List<Music> list = musicRepository.findByArtistOrNameOfMusic(nome);
-
-        List<Music> list = musicRepository.findByArtistOrNameOfMusic(nome);
         if (list.isEmpty()) {
             LOGGER.error("The filter did not return data for the search performed!");
             throw new NoContentException("Data not found");

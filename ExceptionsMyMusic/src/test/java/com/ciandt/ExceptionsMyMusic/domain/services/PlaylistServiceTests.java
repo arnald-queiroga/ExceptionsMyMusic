@@ -75,7 +75,7 @@ public class PlaylistServiceTests {
 
         for (Music music : musicList) {
             if (music.getId().equals(musicDto.getId())) {
-                throw new ResourceNotFoundException("Música existente na playlist!");
+                throw new ResourceNotFoundException("Existing song in the playlist!");
             }
         }
 
@@ -130,7 +130,7 @@ public class PlaylistServiceTests {
 
     @Test
     public void shouldThrowAnExceptionWhenRemovingTheMusicIfItCanNotFindThePlaylist() throws Exception {
-        String playlistId = "Id da playlist não encontrado!";
+        String playlistId = "Playlist ID not found!";
 
         when(playlistRepository.findById(playlistId)).thenReturn(null);
 
@@ -138,7 +138,7 @@ public class PlaylistServiceTests {
             playlistRepository.removeMusicFromPlaylist(playlistId, mus1.getId());
         } catch (Throwable e) {
             assertEquals(ResourceNotFoundException.class, e.getClass());
-            assertEquals("Playlist não encontrada!", e.getMessage());
+            assertEquals("Playlist not found!", e.getMessage());
         }
     }
 
@@ -151,7 +151,7 @@ public class PlaylistServiceTests {
             playlistRepository.removeMusicFromPlaylist(playlistID, musicID);
         } catch (Throwable e) {
             assertEquals(ResourceNotFoundException.class, e.getClass());
-            assertEquals("Música não encontrada na playlist!", e.getMessage());
+            assertEquals("Music not found in playlist!", e.getMessage());
         }
     }
 
