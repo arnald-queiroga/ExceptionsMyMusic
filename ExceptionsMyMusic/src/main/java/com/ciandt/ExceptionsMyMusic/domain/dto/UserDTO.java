@@ -17,6 +17,6 @@ public class UserDTO {
     public UserDTO(User entity) {
         this.id = entity.getId();
         this.name = entity.getName();
-//        this.playlist = entity.getPlaylist();
+        this.playlist = entity.getPlaylist();
     }
 }
