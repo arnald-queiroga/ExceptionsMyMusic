@@ -13,12 +13,17 @@ import java.time.Instant;
 public class ResourcesExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request) {
+        HttpStatus status;
 
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+        if (e.getMessage().equals("Invalid or expired token"))
+            status = HttpStatus.UNAUTHORIZED;
+        else
+            status = HttpStatus.BAD_REQUEST;
+
         StandardError err = new StandardError();
         err.setTimestamp(Instant.now());
         err.setStatus(status.value());
-        err.setError("Solicitação inválida");
+        err.setError("Invalid request");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);

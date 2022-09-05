@@ -30,4 +30,15 @@ public class Music {
 
     @ManyToMany(mappedBy = "musics")
     private Set<Playlist> playlists = new HashSet<>();
+
+    public Music(String id, String name, Artist artist) {
+        this.id = id;
+        this.name = name;
+        this.artist = artist;
+    }
+
+    public Music(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
