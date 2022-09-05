@@ -1,7 +1,9 @@
 package com.ciandt.ExceptionsMyMusic.domain.services;
 
 import com.ciandt.ExceptionsMyMusic.application.repositories.MusicRepository;
+import com.ciandt.ExceptionsMyMusic.domain.dto.Data;
 import com.ciandt.ExceptionsMyMusic.domain.dto.MusicDTO;
+import com.ciandt.ExceptionsMyMusic.domain.dto.TokenDataDTO;
 import com.ciandt.ExceptionsMyMusic.domain.entities.Artist;
 import com.ciandt.ExceptionsMyMusic.domain.entities.Music;
 import com.ciandt.ExceptionsMyMusic.domain.services.exceptions.NoContentException;
@@ -14,16 +16,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @DisplayName("MusicServiceTest")
 public class MusicServiceTests {
-
     @Mock
     private MusicRepository musicRepository;
+
+    @Mock
+    private TokenService tokenService;
+
     @InjectMocks
     private MusicService musicService;
 
@@ -33,18 +40,22 @@ public class MusicServiceTests {
     Music mus2 = new Music("606060xx", "Billie Jean", art2);
     Artist art3 = new Artist("Id Artist 3", "Bruno Mars");
     Music mus3 = new Music("Id Music 3", "Talking to the moon", art3);
+    String invalidName = "invalidName";
+    TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data("devTest", "tokenValue"));
 
     @Test
     @DisplayName("shouldReturnMusicFindByNames")
     public void searchingMusicOnList() throws Exception {
         List<Music> musics = new ArrayList<>(List.of(mus1));
         String name = "Beatles";
-        Mockito.when(musicRepository.findByArtistOrNameOfMusic(name)).thenReturn(musics);
-        List<MusicDTO> musicsDTO = musicService.findByArtistOrMusic(name);
 
-        assertNotNull(musicsDTO);
-        assertEquals(musics.size(), musicsDTO.size());
-        assertEquals("The Beatles", musicsDTO.get(0).getArtist().getName());
+        Mockito.when(musicRepository.findByArtistOrNameOfMusic(name)).thenReturn(musics);
+        Mockito.when(tokenService.generateToken(tokenDataDTO)).thenReturn("tokenValue");
+        List<MusicDTO> musicDTO = musicService.findByArtistOrMusic(name, tokenDataDTO);
+
+        assertNotNull(musicDTO);
+        assertEquals(musics.size(), musicDTO.size());
+        assertEquals("The Beatles", musicDTO.get(0).getArtist().getName());
     }
 
     @Test
@@ -53,11 +64,12 @@ public class MusicServiceTests {
         List<Music> musics = new ArrayList<>(List.of(mus2));
         String name = "mich";
         Mockito.when(musicRepository.findByArtistOrNameOfMusic(name)).thenReturn(musics);
-        List<MusicDTO> musicDTO = musicService.findByArtistOrMusic(name);
+        Mockito.when(tokenService.generateToken(tokenDataDTO)).thenReturn("tokenValue");
+        List<MusicDTO> musicDTO = musicService.findByArtistOrMusic(name, tokenDataDTO);
 
         assertNotNull(musicDTO);
         assertEquals(musics.size(), musicDTO.size());
-        assertEquals("Michael Jackson", musicDTO.get(0).getArtist().getName());
+        assertEquals("Michael Jackson", musics.get(0).getArtist().getName());
     }
 
     @Test
@@ -66,7 +78,7 @@ public class MusicServiceTests {
         List<Music> musics = new ArrayList<>(List.of(mus3));
         String name = "BRUNO";
         Mockito.when(musicRepository.findByArtistOrNameOfMusic(name)).thenReturn(musics);
-        List<MusicDTO> musicDTO = musicService.findByArtistOrMusic(name);
+        List<MusicDTO> musicDTO = musicService.findByArtistOrMusic(name, tokenDataDTO);
 
         assertNotNull(musicDTO);
         assertEquals(musics.size(), musicDTO.size());
@@ -75,13 +87,14 @@ public class MusicServiceTests {
 
     @Test
     @DisplayName("shouldReturnErrorWhenIsLessThanTwoCharacters")
-    public void shouldReturnErrorWhenIsLessThanTwoCharacters(){
+    public void shouldReturnErrorWhenIsLessThanTwoCharacters() {
         String name = "b";
         Mockito.when(musicRepository.findByArtistOrNameOfMusic(name)).thenReturn(new ArrayList<>());
 
         try {
-            musicService.findByArtistOrMusic(name);
-        } catch (Throwable e){
+            Mockito.when(tokenService.generateToken(tokenDataDTO)).thenReturn("tokenValue");
+            musicService.findByArtistOrMusic(name, tokenDataDTO);
+        } catch (Throwable e) {
             assertEquals(ResourceNotFoundException.class, e.getClass());
             assertEquals("Filter must be 3 or more characters long", e.getMessage());
         }
@@ -91,10 +104,11 @@ public class MusicServiceTests {
     @DisplayName("shouldReturnWhenNotFoundNmeInDataBase")
     public void shouldReturnErrorToNotFoundInBd() throws Exception {
         String name = "Valesca";
+        Mockito.when(tokenService.generateToken(tokenDataDTO)).thenReturn("tokenValue");
         Mockito.when(musicRepository.findByArtistOrNameOfMusic(name)).thenReturn(new ArrayList<>());
 
         try {
-            musicService.findByArtistOrMusic(name);
+            musicService.findByArtistOrMusic(name, tokenDataDTO);
         } catch (Throwable e) {
             assertEquals(NoContentException.class, e.getClass());
         }

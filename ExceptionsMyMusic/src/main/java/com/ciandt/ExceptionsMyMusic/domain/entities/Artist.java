@@ -1,6 +1,5 @@
 package com.ciandt.ExceptionsMyMusic.domain.entities;
 
-import com.ciandt.ExceptionsMyMusic.domain.dto.ArtistDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;

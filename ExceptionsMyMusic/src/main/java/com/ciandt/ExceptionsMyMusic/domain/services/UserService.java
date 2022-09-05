@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(UserService.class);
 
     @Autowired
@@ -22,15 +21,15 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserDTO findUserByName(String name) {
+        Optional<User> optionalUser = userRepository.findUserByName(name);
 
-        Optional<User> list = userRepository.findUserByName(name);
-        User entity = list.get();
-        if (list.isEmpty()) {
-            LOGGER.error("Usuário não existe na base de dados");
-            throw new NoContentException("Usuário não existente");
+        if (optionalUser.isEmpty()) {
+            LOGGER.error("User not found on database");
+            throw new NoContentException("Non existing user");
         }
+        UserDTO userDTO = new UserDTO(optionalUser.get());
 
-        LOGGER.info("Busca realizada com sucesso, usuário encontrado na base");
-        return new UserDTO(entity);
+        LOGGER.info("Successfully search, user found in database");
+        return userDTO;
     }
 }
