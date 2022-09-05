@@ -26,7 +26,7 @@ public class PlaylistController {
     @Autowired
     private PlaylistService playlistService;
 
-    @Operation(summary = "Adicionar músicas a playlist", description = "Recebe uma lista de músicas e as adiciona à lista de reprodução")
+    @Operation(summary = "Add music to playlist", description = "Receive a list of songs and add them to the playlist")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful Operation"),
             @ApiResponse(code = 400, message = "Playlist Does Not Exist OR Existing Song in Playlist OR Payload Body Does Not Conform to Documentation"),
