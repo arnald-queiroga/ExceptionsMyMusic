@@ -27,7 +27,6 @@ public class TokenService {
             LOGGER.error("Invalid user!");
             throw new ResourceNotFoundException("Invalid user");
         }
-
         return myFeignClient.clientUserId(userIdDTO);
     }
 

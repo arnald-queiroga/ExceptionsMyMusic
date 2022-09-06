@@ -21,7 +21,6 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserDTO findUserById(String id) {
-
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {

@@ -36,7 +36,6 @@ public class MusicController {
     public ResponseEntity<?> findMusicandArtistByName(@RequestParam(value = "filter") String id,
                                                       @RequestHeader(AUTHORIZATION_ID_HEADER) String userId,
                                                       @RequestHeader(AUTHORIZATION_TOKEN_HEADER) String token) {
-        System.out.println("userId = " + userId);
         TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userId, token));
         List<MusicDTO> dtoMusic = musicService.findByArtistOrMusic(id, tokenDataDTO);
 
