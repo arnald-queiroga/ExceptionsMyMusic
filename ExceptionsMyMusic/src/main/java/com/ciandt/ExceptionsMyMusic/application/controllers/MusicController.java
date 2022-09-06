@@ -19,7 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping
 public class MusicController {
-    private static final String AUTHORIZATION_NAME_HEADER = "name";
+//    private static final String AUTHORIZATION_NAME_HEADER = "name";
+    private static final String AUTHORIZATION_ID_HEADER = "id";
     private static final String AUTHORIZATION_TOKEN_HEADER = "token";
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(MusicController.class);
 
@@ -33,11 +34,12 @@ public class MusicController {
             @ApiResponse(code = 400, message = "Not enough characters")
     })
     @GetMapping(value = "/musicas")
-    public ResponseEntity<?> findMusicandArtistByName(@RequestParam(value = "filter") String name,
-                                                      @RequestHeader(AUTHORIZATION_NAME_HEADER) String userName,
+    public ResponseEntity<?> findMusicandArtistByName(@RequestParam(value = "filter") String id,
+                                                      @RequestHeader(AUTHORIZATION_ID_HEADER) String userId,
                                                       @RequestHeader(AUTHORIZATION_TOKEN_HEADER) String token) {
-        TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userName, token));
-        List<MusicDTO> dtoMusic = musicService.findByArtistOrMusic(name, tokenDataDTO);
+        System.out.println("userId = " + userId);
+        TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userId, token));
+        List<MusicDTO> dtoMusic = musicService.findByArtistOrMusic(id, tokenDataDTO);
 
         LOGGER.info("Operation performed successfully!");
         return ResponseEntity.ok().body(new DataDTO(dtoMusic));
