@@ -22,19 +22,17 @@ public class TokenService {
     @Autowired
     private UserService userService;
 
-    public String generateToken(TokenDataDTO userNameDTO) {
-        if (userService.findUserByName(userNameDTO.getData().getName()) == null) {
+    public String generateToken(TokenDataDTO userIdDTO) {
+        if (userService.findUserById(userIdDTO.getData().getName()) == null) {
             LOGGER.error("Invalid user!");
             throw new ResourceNotFoundException("Invalid user");
         }
-
-        return myFeignClient.clientUserName(userNameDTO);
+        return myFeignClient.clientUserId(userIdDTO);
     }
 
     public void validateHeader(TokenDataDTO tokenDataDTO) {
         try {
-            UserDTO userDTO = userService.findUserByName(tokenDataDTO.getData().getName());
-
+            UserDTO userDTO = userService.findUserById(tokenDataDTO.getData().getName());
             if (!myFeignClient.clientValidator(tokenDataDTO).equals("ok") && userDTO != null) {
                 throw new ResourceNotFoundException("Invalid or expired token");
             }
