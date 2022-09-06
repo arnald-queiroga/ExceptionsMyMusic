@@ -26,6 +26,10 @@ public class User {
     @Column(name = "Nome")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "TipoUsuarioId")
+    private UserType userType;
+
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "PlaylistId", referencedColumnName = "Id")
