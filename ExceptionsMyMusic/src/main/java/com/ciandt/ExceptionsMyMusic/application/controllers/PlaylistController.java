@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/playlists")
 public class PlaylistController {
-    private static final String AUTHORIZATION_NAME_HEADER = "name";
+    private static final String AUTHORIZATION_ID_HEADER = "id";
     private static final String AUTHORIZATION_TOKEN_HEADER = "token";
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(PlaylistController.class);
 
@@ -34,9 +34,9 @@ public class PlaylistController {
     @PostMapping("/{playlistId}/musicas")
     public ResponseEntity<Playlist> findMusicandArtistByName(@PathVariable(value = "playlistId") String playlistId,
                                                              @RequestBody DataDTO dataDTO,
-                                                             @RequestHeader(AUTHORIZATION_NAME_HEADER) String userName,
+                                                             @RequestHeader(AUTHORIZATION_ID_HEADER) String userId,
                                                              @RequestHeader(AUTHORIZATION_TOKEN_HEADER) String token) {
-        TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userName, token));
+        TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userId, token));
         MusicDTO musicDTO = dataDTO.getData().get(0);
         playlistService.addMusicToPlaylist(playlistId, musicDTO, tokenDataDTO);
 
@@ -52,10 +52,10 @@ public class PlaylistController {
     })
     public ResponseEntity<String> removeMusicFromPlaylist(@PathVariable(value = "playlistId") String playlistId,
                                                           @PathVariable(value = "musicaId") String musicaId,
-                                                          @RequestHeader(AUTHORIZATION_NAME_HEADER) String userName,
+                                                          @RequestHeader(AUTHORIZATION_ID_HEADER) String userId,
                                                           @RequestHeader(AUTHORIZATION_TOKEN_HEADER) String token
     ) {
-        TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userName, token));
+        TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userId, token));
         playlistService.removeMusicToPlaylist(playlistId, musicaId, tokenDataDTO);
 
         return ResponseEntity.ok().body("Song successfully deleted!");
