@@ -15,9 +15,7 @@ public class UserController {
     private MyFeignClient myFeignClient;
 
     @PostMapping
-//    public String createUserNameClient(@RequestBody TokenDataDTO tokenDataDTO) {
     public String createUserIdClient(@RequestBody TokenDataDTO tokenDataDTO) {
-//        return myFeignClient.clientUserName(tokenDataDTO);
         return myFeignClient.clientUserId(tokenDataDTO);
     }
 }

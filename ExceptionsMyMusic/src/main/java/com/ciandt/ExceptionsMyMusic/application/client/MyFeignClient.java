@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface MyFeignClient {
     @PostMapping("/api/v1/token")
     public String clientUserId(TokenDataDTO id);
-//    public String clientUserName(TokenDataDTO name);
 
     @PostMapping("/api/v1/token/authorizer")
     public String clientValidator(TokenDataDTO tokenDataDTO);

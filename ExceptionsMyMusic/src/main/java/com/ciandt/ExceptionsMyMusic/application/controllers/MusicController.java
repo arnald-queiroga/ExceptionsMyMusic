@@ -19,7 +19,6 @@ import java.util.List;
 @RestController
 @RequestMapping
 public class MusicController {
-//    private static final String AUTHORIZATION_NAME_HEADER = "name";
     private static final String AUTHORIZATION_ID_HEADER = "id";
     private static final String AUTHORIZATION_TOKEN_HEADER = "token";
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(MusicController.class);
