@@ -25,7 +25,7 @@ public class UserType {
     private String Id;
 
     @Column(name = "Descricao")
-    private String descricao;
+    private String description;
 
     @JsonIgnore
     @OneToMany(mappedBy = "userType")

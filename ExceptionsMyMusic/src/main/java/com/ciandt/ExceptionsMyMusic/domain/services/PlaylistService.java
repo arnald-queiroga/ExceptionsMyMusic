@@ -2,8 +2,10 @@ package com.ciandt.ExceptionsMyMusic.domain.services;
 
 import com.ciandt.ExceptionsMyMusic.application.repositories.MusicRepository;
 import com.ciandt.ExceptionsMyMusic.application.repositories.PlaylistRepository;
+import com.ciandt.ExceptionsMyMusic.application.repositories.UserRepository;
 import com.ciandt.ExceptionsMyMusic.domain.dto.MusicDTO;
 import com.ciandt.ExceptionsMyMusic.domain.dto.TokenDataDTO;
+import com.ciandt.ExceptionsMyMusic.domain.dto.UserDTO;
 import com.ciandt.ExceptionsMyMusic.domain.entities.Music;
 import com.ciandt.ExceptionsMyMusic.domain.entities.Playlist;
 import com.ciandt.ExceptionsMyMusic.domain.services.exceptions.DatabaseException;
@@ -29,6 +31,9 @@ public class PlaylistService {
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public void addMusicToPlaylist(String playlistID, MusicDTO musicDTO, TokenDataDTO tokenDataDTO) {
@@ -57,6 +62,23 @@ public class PlaylistService {
                 LOGGER.info("Music add to playlist!");
                 playlistRepository.save(playlist);
             }
+        }
+    }
+
+    @Transactional
+    public void addMusicToPlaylistCheckingUserType(String playlistID, String userId, MusicDTO musicDTO, TokenDataDTO tokenDataDTO){
+        tokenService.validateHeader(tokenDataDTO);
+        UserDTO user = new UserDTO(userRepository.findById(userId).get());
+        Playlist playlist = user.getPlaylist();
+
+        if (!playlist.getId().equals(playlistID)){
+            throw new ResourceNotFoundException("This playlist does not belongs to this user");
+        }
+
+        if (user.getUserType().getDescription().equals("Comum") && playlist.getMusics().size() >= 5){
+            throw new ResourceNotFoundException("You have reached the maximum number of songs in your playlist. To add more songs, subscribe to the premium plan.");
+        }else {
+            addMusicToPlaylist(playlistID, musicDTO, tokenDataDTO);
         }
     }
 
