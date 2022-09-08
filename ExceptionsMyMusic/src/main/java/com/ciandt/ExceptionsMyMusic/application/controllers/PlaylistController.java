@@ -63,11 +63,11 @@ public class PlaylistController {
     }
 
     @PostMapping("/{playlistId}/{userId}/musicas")
-    public ResponseEntity<Playlist> findMusicandArtistByName(@PathVariable(value = "playlistId") String playlistId,
-                                                             @PathVariable(value = "userId") String userId,
-                                                             @RequestBody DataDTO dataDTO,
-                                                             @RequestHeader(AUTHORIZATION_ID_HEADER) String userTokenId,
-                                                             @RequestHeader(AUTHORIZATION_TOKEN_HEADER) String token) {
+    public ResponseEntity<Playlist> addMusicUserPlaylist(@PathVariable(value = "playlistId") String playlistId,
+                                                         @PathVariable(value = "userId") String userId,
+                                                         @RequestBody DataDTO dataDTO,
+                                                         @RequestHeader(AUTHORIZATION_ID_HEADER) String userTokenId,
+                                                         @RequestHeader(AUTHORIZATION_TOKEN_HEADER) String token) {
         TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userTokenId, token));
         MusicDTO musicDTO = dataDTO.getData().get(0);
         playlistService.addMusicToPlaylistCheckingUserType(playlistId, userId, musicDTO, tokenDataDTO);
