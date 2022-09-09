@@ -20,8 +20,8 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public UserDTO findUserByName(String name) {
-        Optional<User> optionalUser = userRepository.findUserByName(name);
+    public UserDTO findUserById(String id) {
+        Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {
             LOGGER.error("User not found on database");
