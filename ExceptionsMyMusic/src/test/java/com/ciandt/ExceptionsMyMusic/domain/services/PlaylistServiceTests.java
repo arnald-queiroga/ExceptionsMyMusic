@@ -58,6 +58,8 @@ public class PlaylistServiceTests {
     private Set<Music> musicList2 = new HashSet<>();
     private Music musicReturned;
 
+    private User user;
+
     @BeforeEach
     void setUp() throws Exception {
         tokenDataDTO = new TokenDataDTO(new Data("devTest", "tokenValue"));
@@ -79,7 +81,7 @@ public class PlaylistServiceTests {
     public void shouldSaveMusicOnPlaylist() {
 
         musicDto.setId("uhahuhauahuahuahua");
-        playlist = new Playlist(existingIdPlaylist, musicList);
+        playlist = new Playlist(existingIdPlaylist, musicList, user);
         Mockito.when(playlistRepository.findById(existingIdPlaylist)).thenReturn(Optional.ofNullable(playlist));
         Mockito.when(musicRepository.findById(musicDto.getId())).thenReturn(Optional.ofNullable(musicReturned));
         Mockito.when(playlistRepository.findById(existingIdPlaylist)).thenReturn(Optional.ofNullable(playlist));
@@ -103,7 +105,7 @@ public class PlaylistServiceTests {
 
     @Test
     public void shouldReturnNotFoundExceptionWhenNotExistsPlaylistId() {
-        playlist = new Playlist(nonExistingIdPlaylist, musicList);
+        playlist = new Playlist(nonExistingIdPlaylist, musicList, user);
         Mockito.when(playlistRepository.findById(nonExistingIdPlaylist)).thenThrow(ResourceNotFoundException.class);
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
@@ -113,7 +115,7 @@ public class PlaylistServiceTests {
 
     @Test
     public void shouldReturnNotFoundExceptionWhenNotExistsMusicDtoId() {
-        playlist = new Playlist(existingIdPlaylist, musicList);
+        playlist = new Playlist(existingIdPlaylist, musicList, user);
         Mockito.when(playlistRepository.findById(existingIdPlaylist)).thenReturn(Optional.ofNullable(playlist));
         Mockito.when(musicRepository.findById(musicDto.getId()).isEmpty()).thenThrow(ResourceNotFoundException.class);
 

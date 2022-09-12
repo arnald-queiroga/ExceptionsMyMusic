@@ -42,7 +42,7 @@ public class UserControllerTests {
 
         String jsonBody = objectMapper.writeValueAsString(tokenDataDTO);
 
-        when(myFeignClient.clientUserName(tokenDataDTO))
+        when(myFeignClient.clientUserId(tokenDataDTO))
                 .thenReturn(token);
 
         ResultActions result =

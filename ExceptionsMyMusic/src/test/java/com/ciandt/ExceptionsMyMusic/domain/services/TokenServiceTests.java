@@ -29,7 +29,7 @@ public class TokenServiceTests {
     @DisplayName("shouldReturnErrorWhenUserNotFound")
     public void shouldReturnErrorWhenUserNotFound() {
         try {
-            Mockito.doThrow(NoContentException.class).when(userService).findUserByName(invalidName);
+            Mockito.doThrow(NoContentException.class).when(userService).findUserById(invalidName);
         } catch (Throwable e) {
             assertEquals(NoContentException.class, e.getMessage());
         }

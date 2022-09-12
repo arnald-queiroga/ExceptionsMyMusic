@@ -27,6 +27,5 @@ public class ResourcesExceptionHandler {
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);
-
     }
 }
