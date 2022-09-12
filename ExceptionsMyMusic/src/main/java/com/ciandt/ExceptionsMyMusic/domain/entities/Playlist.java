@@ -1,5 +1,6 @@
 package com.ciandt.ExceptionsMyMusic.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,9 +26,14 @@ public class Playlist {
     private String id;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "PlaylistMusicas", joinColumns = @JoinColumn(name = "PlaylistId"),
             inverseJoinColumns = @JoinColumn(name = "MusicaId"))
     private Set<Music> musics = new HashSet<>();
+
+    @OneToOne(mappedBy = "playlist")
+    @JsonIgnore
+    private User user;
 
     public Playlist(String s) {
     }
