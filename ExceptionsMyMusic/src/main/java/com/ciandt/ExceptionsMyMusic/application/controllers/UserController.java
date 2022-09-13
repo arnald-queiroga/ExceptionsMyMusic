@@ -24,16 +24,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PostMapping
+    public String createUserIdClient(@RequestBody TokenDataDTO tokenDataDTO) {
+        return myFeignClient.clientUserId(tokenDataDTO);
+    }
+
     @Operation(summary = "Find User By Id", description = "Receive an Id from User and show the information about it")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful Operation"),
             @ApiResponse(code = 400, message = "User Not Found"),
     })
-
-    @PostMapping
-    public String createUserIdClient(@RequestBody TokenDataDTO tokenDataDTO) {
-        return myFeignClient.clientUserId(tokenDataDTO);
-    }
     @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> findUserById(@PathVariable String userId) {
         UserDTO userDTO = userService.findUserById(userId);
