@@ -65,7 +65,7 @@ public class PlaylistControllerTests {
         ResultActions result =
                 mockMvc.perform(post("/playlists/a39926f4-6acb-4497-884f-d4e5296ef652/musicas")
                         .content(jsonBody)
-                        .header("name", "devTest")
+                        .header("Id", "devTest")
                         .header("token", "tokenValue")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON));
@@ -105,7 +105,7 @@ public class PlaylistControllerTests {
         ResultActions result =
                 mockMvc.perform(delete("/playlists/92d8123f-e9f6-4806-8e0e-1c6a5d46f2ed/musicas/c96b8f6f-4049-4e6b-8687-82e29c05b73")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("name", "devTest")
+                        .header("Id", "devTest")
                         .header("token", "tokenValue")
                         .accept(MediaType.APPLICATION_JSON));
         result.andExpect(status().isOk());
