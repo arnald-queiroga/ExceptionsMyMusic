@@ -21,10 +21,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import static java.nio.file.Paths.get;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -83,5 +85,14 @@ public class UserControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
                 result.andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldFindUserByIdPassingThePathVariable() throws Exception {
+        Mockito.when(userService.findUserById(userExistingId)).thenReturn(userDTO);
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/users/0c2a04a5-d8d2-42a2-a90f-3d6e8f912b88")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
