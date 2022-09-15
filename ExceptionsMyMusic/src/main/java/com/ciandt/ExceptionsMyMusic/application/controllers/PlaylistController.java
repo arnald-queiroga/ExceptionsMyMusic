@@ -79,18 +79,4 @@ public class PlaylistController {
         LOGGER.info("Operation performed successfully!");
         return new ResponseEntity<Playlist>(HttpStatus.CREATED);
     }
-    /*
-    @PostMapping("/{playlistId}/musicas")
-    public ResponseEntity<Playlist> findMusicandArtistByName(@PathVariable(value = "playlistId") String playlistId,
-                                                             @RequestBody DataDTO dataDTO,
-                                                             @RequestHeader(AUTHORIZATION_ID_HEADER) String userId,
-                                                             @RequestHeader(AUTHORIZATION_TOKEN_HEADER) String token) {
-        TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userId, token));
-        MusicDTO musicDTO = dataDTO.getData().get(0);
-        playlistService.addMusicToPlaylist(playlistId, musicDTO, tokenDataDTO);
-
-        LOGGER.info("Operation performed successfully!");
-        return new ResponseEntity<Playlist>(HttpStatus.CREATED);
-    }
-     */
 }

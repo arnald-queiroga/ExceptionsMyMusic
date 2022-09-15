@@ -8,7 +8,6 @@ import com.ciandt.ExceptionsMyMusic.domain.dto.TokenDataDTO;
 import com.ciandt.ExceptionsMyMusic.domain.dto.UserDTO;
 import com.ciandt.ExceptionsMyMusic.domain.entities.Music;
 import com.ciandt.ExceptionsMyMusic.domain.entities.Playlist;
-import com.ciandt.ExceptionsMyMusic.domain.entities.User;
 import com.ciandt.ExceptionsMyMusic.domain.services.exceptions.DatabaseException;
 import com.ciandt.ExceptionsMyMusic.domain.services.exceptions.ResourceNotFoundException;
 import org.slf4j.Logger;
