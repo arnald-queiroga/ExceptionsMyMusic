@@ -63,8 +63,6 @@ public class UserControllerTests {
     private Set<Music> musicList =  new HashSet<>();
     private Set<User> usersList = new HashSet<>();
 
-
-
     @BeforeEach
     void setUp() throws Exception {
         userNameDTO = new Data("ana", "");
@@ -72,7 +70,6 @@ public class UserControllerTests {
         user = new User("0c2a04a5-d8d2-42a2-a90f-3d6e8f912b88", "ana", userType, playlist);
         userType = new UserType("ed7f6acb-1aad-42c9-8c7b-5a49540fcbc4", "Comum", usersList);
         userDTO = new UserDTO("0c2a04a5-d8d2-42a2-a90f-3d6e8f912b88", "ana", playlist, userType);
-
     }
 
     @Test
