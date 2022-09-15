@@ -16,10 +16,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.*;
 
+import static org.assertj.core.api.BDDAssumptions.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -65,7 +69,7 @@ public class PlaylistControllerTests {
         ResultActions result =
                 mockMvc.perform(post("/playlists/a39926f4-6acb-4497-884f-d4e5296ef652/musicas")
                         .content(jsonBody)
-                        .header("name", "devTest")
+                        .header("Id", "devTest")
                         .header("token", "tokenValue")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON));
@@ -105,9 +109,35 @@ public class PlaylistControllerTests {
         ResultActions result =
                 mockMvc.perform(delete("/playlists/92d8123f-e9f6-4806-8e0e-1c6a5d46f2ed/musicas/c96b8f6f-4049-4e6b-8687-82e29c05b73")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("name", "devTest")
+                        .header("Id", "devTest")
                         .header("token", "tokenValue")
                         .accept(MediaType.APPLICATION_JSON));
         result.andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldReturnUserPlaylist() throws Exception {
+        Artist artist = new Artist("32844fdd-bb76-4c0a-9627-e34ddc9fd892", "The Beatles");
+        Music music = new Music("03c86d1e-d3a0-462e-84a9-755cfc49aab8", "Reminiscing");
+        MusicDTO musicDTO = new MusicDTO("hjhsksoisois", "hoiuaouaoau", artist);
+
+        tokenDataDTO = new TokenDataDTO(new Data("devTest", "tokenValue"));
+
+        List<MusicDTO> listMusic = new ArrayList<>();
+        listMusic.add(musicDTO);
+        DataDTO dataDTO = new DataDTO(listMusic);
+
+        Mockito.doNothing().when(service).addMusicToPlaylistCheckingUserType("a39926f4-6acb-4497-884f-d4e5296ef652", "Jose", musicDTO, tokenDataDTO);
+
+        String jsonBody = objectMapper.writeValueAsString(dataDTO);
+        ResultActions result =
+                mockMvc.perform(post("/playlists/a39926f4-6acb-4497-884f-d4e5296ef652//musicas")
+                        .content(jsonBody)
+                        .param("userId", "Jose")
+                        .header("Id", "devTest")
+                        .header("token", "tokenValue")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isCreated());
     }
 }

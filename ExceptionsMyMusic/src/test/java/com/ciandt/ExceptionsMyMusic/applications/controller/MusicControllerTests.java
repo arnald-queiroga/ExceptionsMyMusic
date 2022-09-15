@@ -53,11 +53,9 @@ public class MusicControllerTests {
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/musicas")
                         .param("filter", "Beatles")
-                        .header("name", "devTest")
+                        .header("Id", "devTest")
                         .header("token", "tokenValue")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.data", hasSize(1)))
-//                .andExpect(jsonPath("$.data[0].name", is("Here Comes the Sun")));
     }
 }

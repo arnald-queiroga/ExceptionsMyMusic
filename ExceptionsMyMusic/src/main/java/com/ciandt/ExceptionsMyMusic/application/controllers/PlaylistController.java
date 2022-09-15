@@ -26,13 +26,12 @@ public class PlaylistController {
     @Autowired
     private PlaylistService playlistService;
 
+    @PostMapping("/{playlistId}/musicas")
     @Operation(summary = "Add music to playlist", description = "Receive a list of songs and add them to the playlist")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful Operation"),
             @ApiResponse(code = 400, message = "Playlist Does Not Exist OR Existing Song in Playlist OR Payload Body Does Not Conform to Documentation"),
     })
-
-    @PostMapping("/{playlistId}/musicas")
     public ResponseEntity<Playlist> findMusicandArtistByName(@PathVariable(value = "playlistId") String playlistId,
                                                              @RequestBody DataDTO dataDTO,
                                                              @RequestHeader(AUTHORIZATION_ID_HEADER) String userId,
@@ -63,6 +62,11 @@ public class PlaylistController {
     }
 
     @PostMapping("/{playlistId}/{userId}/musicas")
+    @Operation(summary = "kkkkkkkkkkkkkkk", description = "kkkkkkkk")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Music Successful add"),
+            @ApiResponse(code = 400, message = "Playlist Does Not Exist OR Existing Song in Playlist OR Payload Body Does Not Conform to Documentation"),
+    })
     public ResponseEntity<Playlist> addMusicUserPlaylist(@PathVariable(value = "playlistId") String playlistId,
                                                          @PathVariable(value = "userId") String userId,
                                                          @RequestBody DataDTO dataDTO,
@@ -75,4 +79,18 @@ public class PlaylistController {
         LOGGER.info("Operation performed successfully!");
         return new ResponseEntity<Playlist>(HttpStatus.CREATED);
     }
+    /*
+    @PostMapping("/{playlistId}/musicas")
+    public ResponseEntity<Playlist> findMusicandArtistByName(@PathVariable(value = "playlistId") String playlistId,
+                                                             @RequestBody DataDTO dataDTO,
+                                                             @RequestHeader(AUTHORIZATION_ID_HEADER) String userId,
+                                                             @RequestHeader(AUTHORIZATION_TOKEN_HEADER) String token) {
+        TokenDataDTO tokenDataDTO = new TokenDataDTO(new Data(userId, token));
+        MusicDTO musicDTO = dataDTO.getData().get(0);
+        playlistService.addMusicToPlaylist(playlistId, musicDTO, tokenDataDTO);
+
+        LOGGER.info("Operation performed successfully!");
+        return new ResponseEntity<Playlist>(HttpStatus.CREATED);
+    }
+     */
 }

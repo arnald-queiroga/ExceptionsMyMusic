@@ -30,4 +30,7 @@ public class UserType {
     @JsonIgnore
     @OneToMany(mappedBy = "userType")
     private Set<User> users = new HashSet<>();
+
+    public UserType(String userTypeId, String comum) {
+    }
 }

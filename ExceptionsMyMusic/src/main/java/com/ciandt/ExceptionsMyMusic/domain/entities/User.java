@@ -34,4 +34,7 @@ public class User {
     @OneToOne
     @JoinColumn(name = "PlaylistId", referencedColumnName = "Id")
     private Playlist playlist;
+
+    public void setPlaylists(Playlist playlist) {
+    }
 }
